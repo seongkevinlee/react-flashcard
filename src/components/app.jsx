@@ -24,7 +24,7 @@ export default class App extends React.Component {
   getView() {
     switch (this.state.view) {
       case 'create-card':
-        return <CreateCard/>;
+        return <CreateCard addCard={this.CreateCard}/>;
       case 'review-cards':
         return <ReviewCards/>;
       case 'view-cards':
@@ -44,7 +44,7 @@ export default class App extends React.Component {
     cardsList.push(card);
     this.setState({
       cards: cardsList
-    });
+    }, this.saveCards);
   }
 
   render() {
