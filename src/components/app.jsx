@@ -10,11 +10,13 @@ export default class App extends React.Component {
     this.state = {
       view: 'view-cards'
     };
+
+    this.setView = this.setView.bind(this);
   }
 
-  setView(view) {
+  setView(currentView) {
     this.setState({
-      view: view
+      view: currentView
     });
   }
 
@@ -34,8 +36,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        {this.getView()}
-        <Nav/>
+        <Nav setView={this.setView}/>
+        <div className='col-12'>
+          {this.getView()}
+        </div>
       </div>
     );
   }
