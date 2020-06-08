@@ -17,13 +17,23 @@ export default class App extends React.Component {
     });
   }
 
+  getView() {
+    switch (this.state.view) {
+      case 'create-card':
+        return <CreateCard/>;
+      case 'review-cards':
+        return <ReviewCards/>;
+      case 'view-cards':
+        return <ViewCards/>;
+      default:
+        return null;
+    }
+  }
+
   render() {
     return (
       <div>
-        <h1 className='text-center'>Flash Card App</h1>
-        <CreateCard/>
-        <ReviewCards/>
-        <ViewCards/>
+        {this.getView()}
       </div>
     );
   }
