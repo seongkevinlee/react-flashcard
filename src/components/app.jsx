@@ -2,6 +2,7 @@ import React from 'react';
 import CreateCard from './create-card';
 import ReviewCards from './review-cards';
 import ViewCards from './view-cards';
+import Nav from './nav';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class App extends React.Component {
     return (
       <div>
         {this.getView()}
+        <Nav/>
       </div>
     );
   }
