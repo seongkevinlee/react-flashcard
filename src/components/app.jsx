@@ -7,8 +7,14 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      state: null
+      view: 'view-cards'
     };
+  }
+
+  setView(view) {
+    this.setState({
+      view: view
+    });
   }
 
   render() {
