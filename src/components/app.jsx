@@ -39,6 +39,14 @@ export default class App extends React.Component {
     localStorage.setItem('flash-cards', cardsList);
   }
 
+  addCard(card) {
+    const cardsList = this.state.cards;
+    cardsList.push(card);
+    this.setState({
+      cards: cardsList
+    });
+  }
+
   render() {
     return (
       <div>
