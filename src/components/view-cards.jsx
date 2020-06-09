@@ -7,11 +7,11 @@ function FlashCard(props) {
   return (
     <div className='col mb-4'>
       <div className='card'>
-        <div className='card-body text-left text-white bg-dark'>
+        <div className='card-body text-left text-white bg-dark rounded-top'>
           <h5 className='card-title ml-2 mt-2'>Question</h5>
           <p className='card-text ml-2 mt-2'>{question}</p>
         </div>
-        <div className='card-body text-left'>
+        <div className='card-body text-left rounded-bottom'>
           <h5 className='card-title ml-2 mt-2'>Answer</h5>
           <p className='card-text ml-2 mt-2'>{answer}</p>
         </div>
