@@ -33,6 +33,10 @@ export default class CreateCard extends React.Component {
       answer: this.state.answer
     };
     this.props.addCard(newCard);
+    this.setState({
+      question: '',
+      answer: ''
+    });
   }
 
   handleCancel(event) {
