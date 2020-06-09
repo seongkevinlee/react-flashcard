@@ -15,7 +15,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.saveCards = this.saveCards.bind(this);
     this.addCard = this.addCard.bind(this);
-    // this.getCards = this.getCards.bind(this);
+    this.getCards = this.getCards.bind(this);
   }
 
   setView(currentView) {
@@ -31,24 +31,27 @@ export default class App extends React.Component {
       case 'review-cards':
         return <ReviewCards/>;
       case 'view-cards':
-        return <ViewCards cardList={this.state.cards}/>;
+        return <ViewCards cardList={this.state.cards} onClick={this.getCards}/>;
       default:
         return null;
     }
   }
 
-  // getCards() {
-  //   const savedCardList = localStorage.getItem('flash-cards');
-  //   console.log('savedCardList:', savedCardList);
-  //   this.setState({
-  //     cards: savedCardList
-  //   });
-  // }
+  componentDidMount() {
+    this.getCards();
+  }
+
+  getCards() {
+    const savedCardList = JSON.parse(localStorage.getItem('flash-cards'));
+    this.setState({
+      cards: savedCardList
+    });
+  }
 
   saveCards() {
     const cardsList = JSON.stringify(this.state.cards);
     localStorage.setItem('flash-cards', cardsList);
-    // this.getCards();
+    this.getCards();
   }
 
   addCard(card) {

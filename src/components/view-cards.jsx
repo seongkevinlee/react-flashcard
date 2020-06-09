@@ -22,18 +22,15 @@ function FlashCard(props) {
 
 export default function ViewCards(props) {
   const { cardList } = props;
-
   return (
     <div>
       <header>
         <h1 className='text-center'>My Cards</h1>
       </header>
       <div className='row row-cols-2 row-cols-md-2'>
-        {cardList.map((card, index) => {
-          return (
-            <FlashCard key={index} card={card}/>
-          );
-        })
+        {cardList.length > 0 ? cardList.map((card, index) => {
+          return (<FlashCard key={index} card={card}/>);
+        }) : <h2 className='ml-4'>No Cards to Show</h2>
         }
       </div>
     </div>
