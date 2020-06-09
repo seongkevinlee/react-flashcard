@@ -30,7 +30,7 @@ export default class App extends React.Component {
       case 'review-cards':
         return <ReviewCards/>;
       case 'view-cards':
-        return <ViewCards/>;
+        return <ViewCards cardList={this.state.cards}/>;
       default:
         return null;
     }
