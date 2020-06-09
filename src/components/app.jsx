@@ -9,15 +9,13 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: 'view-cards',
-      cards: [],
-      activeCard: null
+      cards: []
     };
 
     this.setView = this.setView.bind(this);
     this.saveCards = this.saveCards.bind(this);
     this.addCard = this.addCard.bind(this);
     this.getCards = this.getCards.bind(this);
-    this.setActiveCard = this.setActiveCard.bind(this);
   }
 
   setView(currentView) {
@@ -31,7 +29,7 @@ export default class App extends React.Component {
       case 'create-card':
         return <CreateCard addCard={this.addCard}/>;
       case 'review-cards':
-        return <ReviewCards activeCard={this.state.activeCard} setActiveCard={this.setActiveCard}/>;
+        return <ReviewCards cards={this.state.cards} />;
       case 'view-cards':
         return <ViewCards cardList={this.state.cards} onClick={this.getCards}/>;
       default:
@@ -68,15 +66,6 @@ export default class App extends React.Component {
     this.setState({
       cards: cardsList
     }, () => this.saveCards());
-  }
-
-  setActiveCard(index) {
-    // console.log('this.state:', this.state);
-    const cardList = this.state.cards;
-    const activeCard = cardList[index];
-    this.setState({
-      activeCard
-    });
   }
 
   render() {
