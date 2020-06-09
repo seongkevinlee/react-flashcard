@@ -15,6 +15,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.saveCards = this.saveCards.bind(this);
     this.addCard = this.addCard.bind(this);
+    // this.getCards = this.getCards.bind(this);
   }
 
   setView(currentView) {
@@ -36,9 +37,18 @@ export default class App extends React.Component {
     }
   }
 
+  // getCards() {
+  //   const savedCardList = localStorage.getItem('flash-cards');
+  //   console.log('savedCardList:', savedCardList);
+  //   this.setState({
+  //     cards: savedCardList
+  //   });
+  // }
+
   saveCards() {
     const cardsList = JSON.stringify(this.state.cards);
     localStorage.setItem('flash-cards', cardsList);
+    this.getCards();
   }
 
   addCard(card) {
@@ -46,7 +56,7 @@ export default class App extends React.Component {
     cardsList.push(card);
     this.setState({
       cards: cardsList
-    }, this.saveCards);
+    }, this.saveCards());
   }
 
   render() {

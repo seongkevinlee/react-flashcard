@@ -1,18 +1,19 @@
 import React from 'react';
 
 function FlashCard(props) {
-  // const cardList = props.cardList;
-  // const question = props.cardList.question
-  // const answer = props.cardList.answer
+  const question = props.card.question;
+  const answer = props.card.answer;
 
   return (
     <div className='col mb-4'>
       <div className='card'>
-        <div className='text-center'>
-          <h5 className='card-title'>Card Front</h5>
+        <div className='card-body text-left text-white bg-dark'>
+          <h5 className='card-title ml-2 mt-2'>Question</h5>
+          <p className='card-text ml-2 mt-2'>{question}</p>
         </div>
-        <div className='card-body text-center'>
-          <p className='card-text'>Card Back</p>
+        <div className='card-body text-left'>
+          <h5 className='card-title ml-2 mt-2'>Answer</h5>
+          <p className='card-text ml-2 mt-2'>{answer}</p>
         </div>
       </div>
     </div>
@@ -20,9 +21,7 @@ function FlashCard(props) {
 }
 
 export default function ViewCards(props) {
-
-  // const cardList = props.cardList;
-  // console.log('cardList:', cardList);
+  const { cardList } = props;
 
   return (
     <div>
@@ -30,10 +29,12 @@ export default function ViewCards(props) {
         <h1 className='text-center'>My Cards</h1>
       </header>
       <div className='row row-cols-2 row-cols-md-2'>
-        <FlashCard/>
-        <FlashCard/>
-        <FlashCard/>
-        <FlashCard/>
+        {cardList.map((card, index) => {
+          return (
+            <FlashCard key={index} card={card}/>
+          );
+        })
+        }
       </div>
     </div>
   );
