@@ -22,18 +22,31 @@ export default class ReviewCards extends React.Component {
 
   nextCard() {
     let nextCardIndex = this.state.activeCardIndex;
-    nextCardIndex++;
-    this.setState({
-      activeCardIndex: nextCardIndex
-    });
+    if (this.state.activeCardIndex === this.props.cards.length - 1) {
+      this.setState({
+        activeCardIndex: 0
+      });
+    } else {
+      nextCardIndex++;
+      this.setState({
+        activeCardIndex: nextCardIndex
+      });
+    }
+
   }
 
   previousCard() {
     let nextCardIndex = this.state.activeCardIndex;
-    nextCardIndex--;
-    this.setState({
-      activeCardIndex: nextCardIndex
-    });
+    if (this.state.activeCardIndex === 0) {
+      this.setState({
+        activeCardIndex: this.props.cards.length - 1
+      });
+    } else {
+      nextCardIndex--;
+      this.setState({
+        activeCardIndex: nextCardIndex
+      });
+    }
   }
 
   render() {
@@ -44,7 +57,7 @@ export default class ReviewCards extends React.Component {
     return (
       <div>
         <h1 className='text-center' onClick={this.nextCard}>Review Cards</h1>
-        <div id='carouselControls' className="carousel slide carousel-container d-flex align-items-center" data-ride='carousel'>
+        <div id='carouselControls' className="carousel slide carousel-container d-flex align-items-center rounded" data-ride='carousel'>
           <div className="carousel-inner">
             <div className="carousel-item active d-flex justify-content-center align-items-center">
               <h4>{cardFront}</h4>
