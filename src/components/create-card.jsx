@@ -10,6 +10,7 @@ export default class CreateCard extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -23,6 +24,15 @@ export default class CreateCard extends React.Component {
         answer: event.target.value
       });
     }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const newCard = {
+      question: this.state.question,
+      answer: this.state.answer
+    };
+    this.props.addCard(newCard);
   }
 
   handleCancel(event) {
@@ -40,7 +50,7 @@ export default class CreateCard extends React.Component {
           <h1 className='text-center'>Create New Card</h1>
         </header>
         <div>
-          <form onSubmit={this.handleCancel} onReset={this.handleCancel}>
+          <form onSubmit={this.handleSubmit} onReset={this.handleCancel}>
             <div className='form-group'>
               <label htmlFor="question-text">Question</label>
               <textarea
@@ -64,8 +74,8 @@ export default class CreateCard extends React.Component {
               </textarea>
             </div>
             <div className='d-flex justify-content-end'>
-              <button type='submit' className='btn btn-outline-danger'>Cancel</button>
-              <button type='reset' className='btn btn-outline-success'>Save Card</button>
+              <button type='reset' className='btn btn-outline-danger'>Cancel</button>
+              <button type='submit' className='btn btn-outline-success'>Save Card</button>
             </div>
           </form>
         </div>

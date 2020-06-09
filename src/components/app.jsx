@@ -13,6 +13,8 @@ export default class App extends React.Component {
     };
 
     this.setView = this.setView.bind(this);
+    this.saveCards = this.saveCards.bind(this);
+    this.addCard = this.addCard.bind(this);
   }
 
   setView(currentView) {
@@ -40,7 +42,7 @@ export default class App extends React.Component {
   }
 
   addCard(card) {
-    const cardsList = this.state.cards;
+    const cardsList = [...this.state.cards];
     cardsList.push(card);
     this.setState({
       cards: cardsList
