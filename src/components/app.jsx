@@ -43,9 +43,15 @@ export default class App extends React.Component {
 
   getCards() {
     const savedCardList = JSON.parse(localStorage.getItem('flash-cards'));
-    this.setState({
-      cards: savedCardList
-    });
+    if (savedCardList) {
+      this.setState({
+        cards: savedCardList
+      });
+    } else {
+      this.setState({
+        cards: []
+      });
+    }
   }
 
   saveCards() {
@@ -59,7 +65,7 @@ export default class App extends React.Component {
     cardsList.push(card);
     this.setState({
       cards: cardsList
-    }, this.saveCards());
+    }, () => this.saveCards());
   }
 
   render() {
