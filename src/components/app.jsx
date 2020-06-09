@@ -17,6 +17,7 @@ export default class App extends React.Component {
     this.saveCards = this.saveCards.bind(this);
     this.addCard = this.addCard.bind(this);
     this.getCards = this.getCards.bind(this);
+    this.setActiveCard = this.setActiveCard.bind(this);
   }
 
   setView(currentView) {
@@ -70,6 +71,7 @@ export default class App extends React.Component {
   }
 
   setActiveCard(index) {
+    // console.log('this.state:', this.state);
     const cardList = this.state.cards;
     const activeCard = cardList[index];
     this.setState({

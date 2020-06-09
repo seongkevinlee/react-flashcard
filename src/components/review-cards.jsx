@@ -9,7 +9,12 @@ export default class ReviewCards extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.setActiveCard(0);
+  }
+
   render() {
+    // console.log('this.props', this.props);
     return (
       <h1 className='text-center'>Review Cards</h1>
     );
