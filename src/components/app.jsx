@@ -77,7 +77,7 @@ export default class App extends React.Component {
   deleteCard(index) {
     this.setState({
       cardToDelete: index,
-      modalOff: false
+      modalOff: 'visible'
     });
     // console.log('deleteCard this.state', this.state);
     // const cardToDelete = `question:${question} , answer: ${answer}`;
