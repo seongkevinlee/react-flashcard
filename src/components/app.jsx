@@ -29,7 +29,7 @@ export default class App extends React.Component {
       case 'create-card':
         return <CreateCard addCard={this.addCard}/>;
       case 'review-cards':
-        return <ReviewCards/>;
+        return <ReviewCards cards={this.state.cards} />;
       case 'view-cards':
         return <ViewCards cardList={this.state.cards} onClick={this.getCards}/>;
       default:

@@ -30,7 +30,7 @@ export default function ViewCards(props) {
       <div className='row row-cols-2 row-cols-md-2'>
         {cardList.length > 0 ? cardList.map((card, index) => {
           return (<FlashCard key={index} card={card}/>);
-        }) : <h4 className='col-12 text-center mt-4'><em>(No Cards Saved.)</em></h4>
+        }) : <div className='col-12 mt-4'><h4><em>(No Cards Saved.)</em></h4></div>
         }
       </div>
     </div>
