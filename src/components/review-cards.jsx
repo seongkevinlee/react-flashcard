@@ -5,7 +5,8 @@ export default class ReviewCards extends React.Component {
     super(props);
     this.state = {
       activeCardIndex: 0,
-      isFlipped: false
+      isFlipped: false,
+      activeCardClass: 'carousel slide carousel-container d-flex align-items-center rounded bg-dark text-white'
     };
 
     this.nextCard = this.nextCard.bind(this);
@@ -46,11 +47,13 @@ export default class ReviewCards extends React.Component {
     // console.log('event.target:', event.target);
     if (this.state.isFlipped) {
       this.setState({
-        isFlipped: false
+        isFlipped: false,
+        activeCardClass: 'carousel slide carousel-container d-flex align-items-center rounded bg-dark text-white'
       });
     } else {
       this.setState({
-        isFlipped: true
+        isFlipped: true,
+        activeCardClass: 'carousel slide carousel-container d-flex align-items-center rounded bg-secondary text-white'
       });
     }
   }
@@ -61,9 +64,9 @@ export default class ReviewCards extends React.Component {
     const cardBack = cardList[this.state.activeCardIndex].answer;
 
     return (
-      <div>
+      <div className='col-8 m-auto text-center'>
         <h1 className='text-center'>Review Cards</h1>
-        <div id='carouselControls' className="carousel slide carousel-container d-flex align-items-center rounded" data-ride='carousel' onClick={this.flipCard}>
+        <div id='carouselControls' className={this.state.activeCardClass} data-ride='carousel' onClick={this.flipCard}>
           <div className="carousel-inner">
             <div className="carousel-item active d-flex justify-content-center align-items-center">
               <h4>
@@ -73,22 +76,22 @@ export default class ReviewCards extends React.Component {
               </h4>
             </div>
           </div>
-          <a id='carousel-prev'
-            className="carousel-control-prev"
-            role='button'
-            data-slide='prev'>
-            <span className="carousel-control-prev-icon"
-              onClick={this.previousCard}></span>
-            <span className="sr-only">Previous</span>
-          </a>
-          <a
-            className="carousel-control-next"
-            role='button'
-            data-slide='next'>
-            <span className="carousel-control-next-icon" onClick={this.nextCard}></span>
-            <span className="sr-only">Next</span>
-          </a>
         </div>
+        <a id='carousel-prev'
+          className="carousel-control-prev"
+          role='button'
+          data-slide='prev'>
+          <span className="carousel-control-prev-icon"
+            onClick={this.previousCard}></span>
+          <span className="sr-only">Previous</span>
+        </a>
+        <a
+          className="carousel-control-next"
+          role='button'
+          data-slide='next'>
+          <span className="carousel-control-next-icon" onClick={this.nextCard}></span>
+          <span className="sr-only">Next</span>
+        </a>
       </div>
     );
   }
