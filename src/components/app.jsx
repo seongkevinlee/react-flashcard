@@ -79,8 +79,7 @@ export default class App extends React.Component {
       cardToDelete: index,
       modalOff: 'visible'
     });
-    // console.log('deleteCard this.state', this.state);
-    // const cardToDelete = `question:${question} , answer: ${answer}`;
+    // const cardToDelete = this.state.cards.find(element => this.state.cardToDelete[index] === element[index]);
     // const cardsList = [...this.state.cards];
     // console.log('deleteCard cardsList:', cardsList);
     // console.log('deleteCard cardToDelete:', cardToDelete);
