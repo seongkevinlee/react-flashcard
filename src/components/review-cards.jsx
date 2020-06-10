@@ -5,13 +5,13 @@ export default class ReviewCards extends React.Component {
     super(props);
     this.state = {
       activeCardIndex: 0,
-      isFlipped: false,
-      activeCardClass: 'carousel slide carousel-container d-flex align-items-center rounded bg-dark text-white'
+      isFlipped: false
     };
 
     this.nextCard = this.nextCard.bind(this);
     this.previousCard = this.previousCard.bind(this);
     this.flipCard = this.flipCard.bind(this);
+    this.setActiveCardClass = this.setActiveCardClass.bind(this);
   }
 
   nextCard() {
@@ -44,17 +44,22 @@ export default class ReviewCards extends React.Component {
   }
 
   flipCard() {
-    // console.log('event.target:', event.target);
     if (this.state.isFlipped) {
       this.setState({
-        isFlipped: false,
-        activeCardClass: 'carousel slide carousel-container d-flex align-items-center rounded bg-dark text-white'
+        isFlipped: false
       });
     } else {
       this.setState({
-        isFlipped: true,
-        activeCardClass: 'carousel slide carousel-container d-flex align-items-center rounded bg-secondary text-white'
+        isFlipped: true
       });
+    }
+  }
+
+  setActiveCardClass() {
+    if (!this.state.isFlipped) {
+      return 'carousel slide carousel-container d-flex align-items-center rounded bg-dark text-white';
+    } else {
+      return 'carousel slide carousel-container d-flex align-items-center rounded bg-secondary text-white';
     }
   }
 
@@ -66,12 +71,12 @@ export default class ReviewCards extends React.Component {
     return (
       <div className='col-8 m-auto text-center'>
         <h1 className='text-center'>Review Cards</h1>
-        <div id='carouselControls' className={this.state.activeCardClass} data-ride='carousel' onClick={this.flipCard}>
+        <div id='carouselControls' className={this.setActiveCardClass()} data-ride='carousel' onClick={this.flipCard}>
           <div className="carousel-inner">
             <div className="carousel-item active d-flex justify-content-center align-items-center">
               <h4>
                 {
-                  !this.state.isFlipped ? cardFront : cardBack
+                  this.state.isFlipped ? cardBack : cardFront
                 }
               </h4>
             </div>
