@@ -10,7 +10,8 @@ export default class App extends React.Component {
     this.state = {
       view: 'view-cards',
       cards: [],
-      cardToDelete: []
+      cardToDelete: 0,
+      modalOff: 'd-none'
     };
 
     this.setView = this.setView.bind(this);
@@ -20,6 +21,7 @@ export default class App extends React.Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.renderModal = this.renderModal.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleModalCancel = this.handleModalCancel.bind(this);
   }
 
   setView(currentView) {
@@ -73,6 +75,11 @@ export default class App extends React.Component {
   }
 
   deleteCard(index) {
+    this.setState({
+      cardToDelete: index,
+      modalOff: false
+    });
+    // console.log('deleteCard this.state', this.state);
     // const cardToDelete = `question:${question} , answer: ${answer}`;
     // const cardsList = [...this.state.cards];
     // console.log('deleteCard cardsList:', cardsList);
@@ -84,7 +91,7 @@ export default class App extends React.Component {
 
   renderModal() {
     return (
-      <div id='modal-container' className={this.toggleModal()}>
+      <div id='modal-container' className={this.state.modalOff}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -103,7 +110,7 @@ export default class App extends React.Component {
             </div>
             <div className="modal-footer">
               <button className="btn btn-danger">Delete</button>
-              <button className="btn btn-secondary">Cancel</button>
+              <button className="btn btn-secondary" onClick={this.handleModalCancel}>Cancel</button>
             </div>
           </div>
         </div>
@@ -112,11 +119,17 @@ export default class App extends React.Component {
   }
 
   toggleModal() {
-    if (this.state.cardToDelete.length > 0) {
+    if (this.state.cardToDelete > 0) {
       return 'visible';
     } else {
       return 'd-none';
     }
+  }
+
+  handleModalCancel() {
+    this.setState({
+      modalOff: 'd-none'
+    });
   }
 
   render() {

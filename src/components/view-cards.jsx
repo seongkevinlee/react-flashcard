@@ -3,6 +3,8 @@ import React from 'react';
 function FlashCard(props) {
   const question = props.card.question;
   const answer = props.card.answer;
+  const index = props.id;
+  // console.log('FlashCard index:', index);
   // console.log('FlashCard props:', props);
 
   return (
@@ -17,7 +19,7 @@ function FlashCard(props) {
           <p className='card-text ml-2 mt-2'>{answer}</p>
         </div>
         <div className='col-12 text-center bg-dark rounded-bottom'>
-          <i className='fas fa-trash-alt m-3 text-white' onClick={() => props.onDelete()}></i>
+          <i className='fas fa-trash-alt m-3 text-white' onClick={() => props.onDelete(index)}></i>
         </div>
       </div>
     </div>
@@ -34,7 +36,7 @@ export default function ViewCards(props) {
       </header>
       <div className='row row-cols-2 row-cols-md-2'>
         {cardList.length > 0 ? cardList.map((card, index) => {
-          return (<FlashCard key={index} card={card} onDelete={props.deleteCard}/>);
+          return (<FlashCard key={index} id={index} card={card} onDelete={props.deleteCard}/>);
         }) : <div className='col-12 mt-4'><h4><em>(No Cards Saved.)</em></h4></div>
         }
       </div>
