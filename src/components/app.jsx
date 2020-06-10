@@ -9,13 +9,17 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: 'view-cards',
-      cards: []
+      cards: [],
+      cardToDelete: []
     };
 
     this.setView = this.setView.bind(this);
     this.saveCards = this.saveCards.bind(this);
     this.addCard = this.addCard.bind(this);
     this.getCards = this.getCards.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
+    this.renderModal = this.renderModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   setView(currentView) {
@@ -31,7 +35,7 @@ export default class App extends React.Component {
       case 'review-cards':
         return <ReviewCards cards={this.state.cards} />;
       case 'view-cards':
-        return <ViewCards cardList={this.state.cards} onClick={this.getCards}/>;
+        return <ViewCards cardList={this.state.cards} onClick={this.getCards} deleteCard={this.deleteCard}/>;
       default:
         return null;
     }
@@ -68,9 +72,57 @@ export default class App extends React.Component {
     }, () => this.saveCards());
   }
 
+  deleteCard(index) {
+    // const cardToDelete = `question:${question} , answer: ${answer}`;
+    // const cardsList = [...this.state.cards];
+    // console.log('deleteCard cardsList:', cardsList);
+    // console.log('deleteCard cardToDelete:', cardToDelete);
+    this.toggleModal();
+    // cardsList.splice();
+    // localStorage.removeItem('flash-cards')
+  }
+
+  renderModal() {
+    return (
+      <div id='modal-container' className={this.toggleModal()}>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Do you really want to delete this card?
+              </h5>
+              <button
+                className="close"
+                data-dismiss='modal'>
+                <span>&times;</span>
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <p>{'Question:'}</p>
+              <p>{'Answer:'}</p>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-danger">Delete</button>
+              <button className="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  toggleModal() {
+    if (this.state.cardToDelete.length > 0) {
+      return 'visible';
+    } else {
+      return 'd-none';
+    }
+  }
+
   render() {
     return (
       <div>
+        {this.renderModal()}
         <Nav setView={this.setView}/>
         <div className='col-12'>
           {this.getView()}
