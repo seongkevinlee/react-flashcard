@@ -15,6 +15,9 @@ function FlashCard(props) {
           <h5 className='card-title ml-2 mt-2'>Answer</h5>
           <p className='card-text ml-2 mt-2'>{answer}</p>
         </div>
+        <div className='col-12 text-center'>
+          <i className='fas fa-trash-alt fa-lg m-4'></i>
+        </div>
       </div>
     </div>
   );
