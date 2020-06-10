@@ -4,21 +4,14 @@ export default class ReviewCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeCardIndex: 0
+      activeCardIndex: 0,
+      isFlipped: false
     };
 
     this.nextCard = this.nextCard.bind(this);
     this.previousCard = this.previousCard.bind(this);
-    // this.setActiveCard = this.setActiveCard.bind(this);
+    this.flipCard = this.flipCard.bind(this);
   }
-
-  // componentDidMount() {
-  //   this.setActiveCard();
-  // }
-
-  // setActiveCard() {
-
-  // }
 
   nextCard() {
     let nextCardIndex = this.state.activeCardIndex;
@@ -49,18 +42,35 @@ export default class ReviewCards extends React.Component {
     }
   }
 
+  flipCard() {
+    // console.log('event.target:', event.target);
+    if (this.state.isFlipped) {
+      this.setState({
+        isFlipped: false
+      });
+    } else {
+      this.setState({
+        isFlipped: true
+      });
+    }
+  }
+
   render() {
     const cardList = this.props.cards;
     const cardFront = cardList[this.state.activeCardIndex].question;
-    // const cardBack = cardList[this.state.activeCardIndex].answer;
+    const cardBack = cardList[this.state.activeCardIndex].answer;
 
     return (
       <div>
-        <h1 className='text-center' onClick={this.nextCard}>Review Cards</h1>
-        <div id='carouselControls' className="carousel slide carousel-container d-flex align-items-center rounded" data-ride='carousel'>
+        <h1 className='text-center'>Review Cards</h1>
+        <div id='carouselControls' className="carousel slide carousel-container d-flex align-items-center rounded" data-ride='carousel' onClick={this.flipCard}>
           <div className="carousel-inner">
             <div className="carousel-item active d-flex justify-content-center align-items-center">
-              <h4>{cardFront}</h4>
+              <h4>
+                {
+                  !this.state.isFlipped ? cardFront : cardBack
+                }
+              </h4>
             </div>
           </div>
           <a id='carousel-prev'
