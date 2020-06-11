@@ -10,8 +10,8 @@ export default class App extends React.Component {
     this.state = {
       view: 'view-cards',
       cards: [],
-      cardToDelete: 0,
-      modalOff: 'd-none'
+      cardToDeleteIndex: 0,
+      modalOff: true
     };
 
     this.setView = this.setView.bind(this);
@@ -20,8 +20,8 @@ export default class App extends React.Component {
     this.getCards = this.getCards.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.renderModal = this.renderModal.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
     this.handleModalCancel = this.handleModalCancel.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   setView(currentView) {
@@ -76,21 +76,35 @@ export default class App extends React.Component {
 
   deleteCard(index) {
     this.setState({
-      cardToDelete: index,
-      modalOff: 'visible'
+      cardToDeleteIndex: index,
+      modalOff: false
     });
-    // const cardToDelete = this.state.cards.find(element => this.state.cardToDelete[index] === element[index]);
-    // const cardsList = [...this.state.cards];
-    // console.log('deleteCard cardsList:', cardsList);
-    // console.log('deleteCard cardToDelete:', cardToDelete);
-    this.toggleModal();
-    // cardsList.splice();
-    // localStorage.removeItem('flash-cards')
+  }
+
+  handleDelete() {
+    const index = this.state.cardToDeleteIndex;
+    const cardsList = [...this.state.cards];
+    // console.log('handleDelete cardsList1:', cardsList);
+    // const cardToDelete = cardsList[index];
+    // console.log('handleDelete cardToDelete:', cardToDelete);
+    cardsList.splice(index, 1);
+    // console.log('handleDelete cardsList2:', cardsList);
+    this.setState({
+      cards: cardsList,
+      modalOff: true
+    });
+    this.saveCards();
   }
 
   renderModal() {
+    const index = this.state.cardToDeleteIndex;
+    const cardsList = [...this.state.cards];
+    const cardToDelete = cardsList[index];
+    // console.log('renderModal cardToDelete:', cardToDelete);
+
     return (
-      <div id='modal-container' className={this.state.modalOff}>
+      <div id='modal-container'
+        className={this.state.modalOff ? 'd-none' : 'visible'}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -104,11 +118,11 @@ export default class App extends React.Component {
             </div>
 
             <div className="modal-body">
-              <p>{'Question:'}</p>
-              <p>{'Answer:'}</p>
+              <p>{cardToDelete ? `Question: ${cardToDelete.question}` : null}</p>
+              <p>{cardToDelete ? `Answer: ${cardToDelete.answer}` : null}</p>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-danger">Delete</button>
+              <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
               <button className="btn btn-secondary" onClick={this.handleModalCancel}>Cancel</button>
             </div>
           </div>
@@ -117,17 +131,9 @@ export default class App extends React.Component {
     );
   }
 
-  toggleModal() {
-    if (this.state.cardToDelete > 0) {
-      return 'visible';
-    } else {
-      return 'd-none';
-    }
-  }
-
   handleModalCancel() {
     this.setState({
-      modalOff: 'd-none'
+      modalOff: true
     });
   }
 

@@ -4,8 +4,6 @@ function FlashCard(props) {
   const question = props.card.question;
   const answer = props.card.answer;
   const index = props.id;
-  // console.log('FlashCard index:', index);
-  // console.log('FlashCard props:', props);
 
   return (
     <div className='col mb-4'>
@@ -28,7 +26,6 @@ function FlashCard(props) {
 
 export default function ViewCards(props) {
   const { cardList } = props;
-  // console.log('ViewCards props:', props);
   return (
     <div>
       <header>
