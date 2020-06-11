@@ -84,23 +84,17 @@ export default class App extends React.Component {
   handleDelete() {
     const index = this.state.cardToDeleteIndex;
     const cardsList = [...this.state.cards];
-    // console.log('handleDelete cardsList1:', cardsList);
-    // const cardToDelete = cardsList[index];
-    // console.log('handleDelete cardToDelete:', cardToDelete);
     cardsList.splice(index, 1);
-    // console.log('handleDelete cardsList2:', cardsList);
     this.setState({
       cards: cardsList,
       modalOff: true
-    });
-    this.saveCards();
+    }, () => this.saveCards());
   }
 
   renderModal() {
     const index = this.state.cardToDeleteIndex;
     const cardsList = [...this.state.cards];
     const cardToDelete = cardsList[index];
-    // console.log('renderModal cardToDelete:', cardToDelete);
 
     return (
       <div id='modal-container'
