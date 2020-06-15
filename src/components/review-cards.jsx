@@ -1,4 +1,5 @@
 import React from 'react';
+import ProgressBar from './progress-bar';
 
 export default class ReviewCards extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class ReviewCards extends React.Component {
     this.previousCard = this.previousCard.bind(this);
     this.flipCard = this.flipCard.bind(this);
     this.setActiveCardClass = this.setActiveCardClass.bind(this);
+    this.percentComplete = this.percentComplete.bind(this);
   }
 
   nextCard() {
@@ -63,6 +65,15 @@ export default class ReviewCards extends React.Component {
     }
   }
 
+  percentComplete() {
+    const index = this.state.activeCardIndex;
+    const length = this.props.cards.length;
+    // console.log('length:', length);
+    const percentComplete = index / length;
+    // console.log('percentComplete:', percentComplete);
+    return percentComplete;
+  }
+
   render() {
     const cardList = this.props.cards;
     const cardFront = cardList[this.state.activeCardIndex].question;
@@ -71,6 +82,7 @@ export default class ReviewCards extends React.Component {
     return (
       <div className='col-8 m-auto text-center'>
         <h1 className='text-center'>Review Cards</h1>
+        <ProgressBar percentComplete={this.percentComplete}/>
         <div id='carouselControls' className={this.setActiveCardClass()} data-ride='carousel' onClick={this.flipCard}>
           <div className="carousel-inner">
             <div className="carousel-item active d-flex justify-content-center align-items-center">
