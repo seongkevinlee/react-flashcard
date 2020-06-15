@@ -68,10 +68,13 @@ export default class ReviewCards extends React.Component {
   percentComplete() {
     const index = this.state.activeCardIndex;
     const length = this.props.cards.length;
-    // console.log('length:', length);
-    const percentComplete = index / length;
-    // console.log('percentComplete:', percentComplete);
-    return percentComplete;
+    const percentComplete = Math.floor(index / length * 100);
+    const progressBarDetails = {
+      index: index,
+      length: length,
+      percentComplete: percentComplete
+    };
+    return progressBarDetails;
   }
 
   render() {
