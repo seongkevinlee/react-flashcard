@@ -1,8 +1,11 @@
 import React from 'react';
 
 export default function ProgressBar(props) {
+  const index = props.percentComplete().index;
+  const length = props.percentComplete().length;
+
   const style = {
-    width: props.percentComplete() + '%'
+    width: props.percentComplete().percentComplete + '%'
   };
 
   return (
@@ -14,7 +17,7 @@ export default function ProgressBar(props) {
         aria-valuenow='75'
         aria-valuemin='0'
         aria-valuemax='100'>
-        {style.width}
+        {`${index}/${length}`}
       </div>
     </div>
   );
